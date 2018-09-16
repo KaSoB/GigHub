@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web.Http;
 
 namespace GigHub.Controllers {
-
     [Authorize]
     public class AttendancesController : ApiController {
         private readonly ApplicationDbContext _context;

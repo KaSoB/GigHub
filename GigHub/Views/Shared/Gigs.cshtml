@@ -5,7 +5,7 @@
 <h1>@Model.Heading</h1>
 
 <ul class="gigs voffset4">
-    @foreach(var gig in Model.UpcomingGigs) {
+    @foreach (var gig in Model.UpcomingGigs) {
         <li>
             <div class="date">
                 <div class="month">
@@ -26,7 +26,7 @@
                     @gig.Genre.Name
                 </span>
                 @if (Model.ShowActions) {
-                    <button data-gig-id="@gig.Id" class="btn btn-default btn-sm pull-right js-toggle-attendance">Going?</button>
+                    <button class="btn btn-default btn-sm pull-right js-toggle-attendance" data-gig-id="@gig.Id">Going?</button>
                 }
 
             </div>
@@ -36,7 +36,7 @@
 </ul>
 @section scripts {
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".js-toggle-attendance").click(function (e) {
                 var button = $(e.target);
                 $.post("/api/attendances", { "": button.attr("data-gig-id") })
@@ -52,14 +52,15 @@
             });
             $(".js-toggle-follow").click(function (e) {
                 var button = $(e.target);
-                $.post("/api/followings", { followeeId: button.attr("data-user-id")
+                $.post("/api/followings", {
+                    followeeId: button.attr("data-user-id")
                         .done(function () {
                             button.text("Following");
                         })
                         .fail(function () {
                             alert("Something failed");
-                    })
+                        })
+                });
             });
-        });
-    </script>    
+    </script>
 }
