@@ -3,7 +3,7 @@ using Microsoft.Owin.Security;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace GigHub.Models {
+namespace GigHub.ViewModels {
     public class IndexViewModel {
         public bool HasPassword { get; set; }
         public IList<UserLoginInfo> Logins { get; set; }
