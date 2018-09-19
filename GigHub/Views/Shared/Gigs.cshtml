@@ -37,9 +37,20 @@
 @section scripts {
     <script>
         $(document).ready(function () {
+            $(".js-toggle-follow").click(function (e) {
+                var button = $(e.target);
+                $.post("/api/following", { followeeId: button.attr("data-user-id") })
+                    .done(function () {
+                        button.text("Following");
+                    })
+                    .fail(function () {
+                        alert("Something failed");
+                    });
+            });
+           
             $(".js-toggle-attendance").click(function (e) {
                 var button = $(e.target);
-                $.post("/api/attendances", { "": button.attr("data-gig-id") })
+                $.post("/api/attendances", { gigId: button.attr("data-gig-id") })
                     .done(function () {
                         button
                             .removeClass("btn-default")
@@ -50,17 +61,7 @@
                         alert("Something failed!");
                     });
             });
-            $(".js-toggle-follow").click(function (e) {
-                var button = $(e.target);
-                $.post("/api/followings", {
-                    followeeId: button.attr("data-user-id")
-                        .done(function () {
-                            button.text("Following");
-                        })
-                        .fail(function () {
-                            alert("Something failed");
-                        })
-                });
-            });
+
+        });
     </script>
 }
