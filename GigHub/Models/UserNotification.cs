@@ -24,5 +24,8 @@ namespace GigHub.Models {
             User = user ?? throw new ArgumentNullException("User");
             Notification = notification ?? throw new ArgumentNullException("Notification");
         }
+        public void Read() {
+            IsRead = true;
+        }
     }
 }

@@ -35,5 +35,6 @@ namespace GigHub.Models {
         public static Notification GigCanceled(Gig gig) {
             return new Notification(NotificationType.GigCanceled, gig);
         }
+     
     }
 }
