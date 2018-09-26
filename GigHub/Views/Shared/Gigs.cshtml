@@ -14,7 +14,7 @@
         </div> 
     </div>
 }
-<ul class="gigs voffset4">
+<ul id="gigs" class="gigs voffset4">
     @foreach (var gig in Model.UpcomingGigs) {
         <li>
             <div class="date">
@@ -57,44 +57,8 @@
 @section scripts {
     <script>
         $(document).ready(function () {
-            $(".js-toggle-attendance").click(function (e) {
-                var button = $(e.target);
-                if (button.hasClass("btn-default")) {
-                    $.post("/api/attendances", { gigId: button.attr("data-gig-id") })
-                        .done(function () {
-                            button
-                                .removeClass("btn-default")
-                                .addClass("btn-info")
-                                .text("Going");
-                        })
-                        .fail(function () {
-                            alert("Something failed!");
-                        });
-                } else {
-                    $.ajax({
-                        url: "/api/attendances/" + button.attr("data-gig-id"),
-                        method: "DELETE"
-                    }).done(function () {
-                        button
-                            .removeClass("btn-info")
-                            .addClass("btn-default")
-                            .text("Going?");
-                    }).fail(function () {
-                        alert("Something alert");
-                    });
-                }
-            });
-
-            $(".js-toggle-follow").click(function (e) {
-                var button = $(e.target); 
-                $.post("/api/following", { followeeId: button.attr("data-user-id") })
-                    .done(function () {
-                        button.text("Following");
-                    })
-                    .fail(function () {
-                        alert("Something failed");
-                    });
-            });
+            GigsController.init("#gigs");
+            GigsController.follow();
            
           
 
