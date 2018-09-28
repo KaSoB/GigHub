@@ -9,6 +9,8 @@ namespace GigHub.Tests.Extensions {
             identity.AddClaim(new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name", userName));
             identity.AddClaim(new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier", userId));
             var principal = new GenericPrincipal(identity, null);
+
+            controller.User = principal;
         }
     }
 }
