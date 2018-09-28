@@ -13,14 +13,14 @@ namespace GigHub.Controllers {
         private readonly AttendanceRepository _attendanceRepository;
         private readonly FollowRepository _followRepository;
         private readonly GenreRepository _genreRepository;
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public GigsController() {
+        public GigsController(IUnitOfWork unitOfWork) {
             _context = new ApplicationDbContext();
             _attendanceRepository = new AttendanceRepository(_context);
             _followRepository = new FollowRepository(_context);
             _genreRepository = new GenreRepository(_context);
-            _unitOfWork = new UnitOfWork(_context);
+            _unitOfWork = unitOfWork;
         }
         // GET: Gigs
         [Authorize]

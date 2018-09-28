@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using GigHub.Persistence.EntityConfigurations;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 
 namespace GigHub.Models {
@@ -18,6 +19,8 @@ namespace GigHub.Models {
             return new ApplicationDbContext();
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
+            modelBuilder.Configurations.Add(new GigConfiguration());
+
             modelBuilder.Entity<Attendance>()
                 .HasRequired(a => a.Gig)
                 .WithMany(g => g.Attendances)

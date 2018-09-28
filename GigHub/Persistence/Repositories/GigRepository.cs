@@ -5,7 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 
 namespace GigHub.Repositories {
-    public class GigRepository {
+    public class GigRepository : IGigRepository {
         private readonly ApplicationDbContext _context;
 
         public GigRepository(ApplicationDbContext context) {
@@ -18,7 +18,7 @@ namespace GigHub.Repositories {
                 .SingleOrDefault(g => g.Id == gigId);
         }
 
-        public List<Gig> GetGigsUserAttending(string userId) {
+        public IEnumerable<Gig> GetGigsUserAttending(string userId) {
             return _context.Attendances
                 .Where(a => a.AttendeeId == userId)
                 .Select(a => a.Gig)
@@ -45,7 +45,7 @@ namespace GigHub.Repositories {
 
         public void Add(Gig gig) {
             _context.Gigs.Add(gig);
-    
+
         }
     }
 }
